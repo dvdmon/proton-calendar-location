@@ -1,0 +1,19 @@
+# Dependencies and build output (for future development)
+node_modules/
+dist/
+build/
+
+# Local environment files and secrets
+.env
+.env.*
+!.env.example
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Debugging and temporary files
+*.log
+*.tmp
