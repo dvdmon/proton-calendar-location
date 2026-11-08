@@ -333,12 +333,9 @@ function addLocationSearchButton() {
 
   button.type = "button";
   button.textContent = "Search locations";
-  button.className = "pcl-search-button";
-
-  // Basic styling until we introduce a dedicated CSS file.
-  button.style.marginTop = "6px";
-  button.style.fontSize = "0.875rem";
-  button.style.cursor = "pointer";
+  // Reuse Proton Calendar's existing button styles.
+  button.className =
+    "pcl-search-button button-underline button-medium button-underline-norm";
 
   button.addEventListener("click", () => {
     searchLocations(locationInput.value);
@@ -365,7 +362,6 @@ function addLocationSearchButton() {
   searchContainer.style.flexDirection = "column";
   searchContainer.style.alignItems = "flex-start";
   searchContainer.style.width = "100%";
-  searchContainer.style.marginTop = "6px";
 
   // Add the search button to our container.
   searchContainer.appendChild(button);
