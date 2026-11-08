@@ -136,6 +136,33 @@ checkForEventPopover();
 addLocationSearchButton();
 
 /**
+ * Displays an inline error message beneath the location search button.
+ *
+ * @param {string} message - User-friendly error message.
+ */
+function showLocationSearchError(message) {
+  const searchContainer = document.querySelector(".pcl-search-container");
+
+  if (!searchContainer) {
+    return;
+  }
+
+  // Remove any previous error message.
+  searchContainer.querySelector(".pcl-search-error")?.remove();
+
+  const error = document.createElement("div");
+  error.className = "pcl-search-error";
+  error.textContent = message;
+  error.setAttribute("role", "alert");
+
+  error.style.color = "#e57373";
+  error.style.fontSize = "0.875rem";
+  error.style.marginTop = "4px";
+
+  searchContainer.appendChild(error);
+}
+
+/**
  * Requests location suggestions from the background service worker.
  *
  * @param {string} query - The address or place to search for.
@@ -155,18 +182,7 @@ function searchLocations(query) {
   searchContainer?.querySelector(".pcl-search-results")?.remove();
 
   if (!query.trim()) {
-    const error = document.createElement("div");
-
-    error.className = "pcl-search-error";
-    error.textContent = "Enter a location above before searching.";
-    error.setAttribute("role", "alert");
-
-    error.style.color = "#e57373";
-    error.style.fontSize = "0.875rem";
-    error.style.marginTop = "4px";
-
-    searchContainer?.appendChild(error);
-
+    showLocationSearchError("Enter a location above before searching.");
     return;
   }
 
@@ -193,11 +209,19 @@ function searchLocations(query) {
           `${LOG_PREFIX} Messaging error:`,
           chrome.runtime.lastError.message,
         );
+
+        showLocationSearchError(
+          "Unable to search locations. Please try again.",
+        );
         return;
       }
 
       if (!response?.success) {
         console.error(`${LOG_PREFIX} Location search failed:`, response?.error);
+
+        showLocationSearchError(
+          "Unable to search locations. Please try again.",
+        );
         return;
       }
 
