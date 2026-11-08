@@ -5,6 +5,9 @@ console.log(`${LOG_PREFIX} Extension loaded successfully.`);
 // Keep track of the most recently detected popover element.
 let currentPopover = null;
 
+// Identifies the latest location search request.
+let latestSearchId = 0;
+
 /**
  * Finds the location text displayed in an event popover.
  *
@@ -140,6 +143,13 @@ addLocationSearchButton();
 function searchLocations(query) {
   const searchContainer = document.querySelector(".pcl-search-container");
 
+  // Invalidate any previous search, including when this query is empty.
+  const searchId = ++latestSearchId;
+
+  // Remember which editor initiated this search.
+  const locationInput = document.querySelector("#event-location-input");
+  const searchButton = document.querySelector(".pcl-search-button");
+
   // Clear previous validation messages and search results.
   searchContainer?.querySelector(".pcl-search-error")?.remove();
   searchContainer?.querySelector(".pcl-search-results")?.remove();
@@ -166,6 +176,18 @@ function searchLocations(query) {
       query: query.trim(),
     },
     (response) => {
+      // Ignore results from searches that are no longer current,
+      // or from an event editor that has since been closed or replaced.
+      if (
+        searchId !== latestSearchId ||
+        !locationInput?.isConnected ||
+        !searchButton?.isConnected ||
+        document.querySelector("#event-location-input") !== locationInput ||
+        document.querySelector(".pcl-search-button") !== searchButton
+      ) {
+        return;
+      }
+
       if (chrome.runtime.lastError) {
         console.error(
           `${LOG_PREFIX} Messaging error:`,
