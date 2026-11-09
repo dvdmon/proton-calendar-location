@@ -2,7 +2,7 @@
 
 An open-source browser extension that adds location search and OpenStreetMap integration to [Proton Calendar](https://calendar.proton.me).
 
-**Status: Experimental — Early Development**
+**Status: Experimental — Public Beta**
 
 This is an unofficial community project and is not affiliated with or endorsed by Proton AG.
 
@@ -30,18 +30,26 @@ Location searches are initiated explicitly by the user. The extension does not a
 
 ## Installation
 
-The extension is not yet available through the Chrome Web Store.
+**Beta installation (Brave and Chrome)**
 
-To install the development version in Brave or Chrome:
+The extension is not yet available through the Chrome Web Store. For now, it must be installed manually.
 
-1. Download or clone this repository.
-2. Open `brave://extensions` or `chrome://extensions`.
-3. Enable **Developer mode**.
-4. Select **Load unpacked**.
-5. Select the directory containing `manifest.json`.
-6. Open or refresh [Proton Calendar](https://calendar.proton.me).
+1. Visit the [GitHub Releases](https://github.com/dvdmon/proton-calendar-location/releases) page.
+2. Open the latest beta release and download **Source code (zip)** under **Assets**.
+3. Extract the downloaded ZIP file to a folder on your computer.
+4. Open `brave://extensions` in Brave or `chrome://extensions` in Chrome.
+5. Enable **Developer mode**.
+6. Click **Load unpacked**.
+7. Select the extracted folder containing `manifest.json`.
+8. Open or refresh [Proton Calendar](https://calendar.proton.me).
 
-After modifying the extension's source code, reload the extension from the browser's Extensions page and refresh Proton Calendar.
+The extension should now add location search functionality when creating or editing calendar events and OpenStreetMap links when viewing events with locations.
+
+**Important notes:**
+
+- Keep the extracted folder in place after installing the extension. The browser loads its files from that directory.
+- If you install a newer version manually, reload the extension from the browser's Extensions page and refresh Proton Calendar.
+- This is an experimental beta release and may require updates when Proton Calendar changes its interface.
 
 ## Privacy
 
@@ -59,21 +67,20 @@ Privacy is a primary design consideration.
 
 ## Known Limitations
 
-- The extension currently supports Chromium-based browsers, with initial testing performed in Brave.
+- The extension is designed for Chromium-based browsers using Manifest V3.
 - Location search quality depends on the available OpenStreetMap data and Photon geocoding results.
 - Some residential addresses may be inaccurate or unavailable.
 - Suite, apartment, floor, and other secondary address information may interfere with map searches. For best results, use the primary street address, city, state, and postal code.
 - Search results may contain duplicate or closely related geographic features.
 - The extension depends on Proton Calendar's current HTML structure and may require updates when Proton changes its interface.
-- Network error handling and some asynchronous search scenarios are not yet fully addressed.
-- The public Photon server is currently used for development and evaluation; its suitability for wider distribution remains under review.
+- The public Photon geocoding service has no guaranteed availability. Location searches may occasionally fail due to network problems, service outages, or usage restrictions.
+- The extension has initially been tested on Brave for Windows. Compatibility with other Chromium-based browsers and operating systems has not yet been verified.
 
 ## Planned Improvements
 
 Potential future enhancements include:
 
 - Search-as-you-type autocomplete with debouncing.
-- Improved error handling and asynchronous request management.
 - Better search-result presentation and keyboard navigation.
 - Configurable mapping and geocoding providers.
 - TypeScript migration.
@@ -96,9 +103,20 @@ No build process, external JavaScript libraries, or backend server are currently
 
 ## Contributing and Feedback
 
-Bug reports, suggestions, and contributions are welcome through GitHub Issues and pull requests.
+Bug reports, suggestions, and contributions are welcome through [GitHub Issues](https://github.com/dvdmon/proton-calendar-location/issues) and pull requests.
 
-Because the extension interacts with Proton Calendar's user interface, please include relevant browser and Proton Calendar interface details when reporting compatibility problems.
+**Beta testers:** If you encounter a problem, please include:
+
+- Operating system and version (for example, Windows 11, macOS, or Ubuntu).
+- Browser and version (for example, Brave, Chrome, or Edge).
+- A brief description of what you were trying to do.
+- Steps to reproduce the problem.
+- What you expected to happen and what actually happened.
+- Any relevant browser console errors or screenshots, if available.
+
+Because the extension interacts directly with Proton Calendar's interface, differences in the calendar UI may also be relevant.
+
+**Privacy note:** Please remove personal calendar details, addresses, email addresses, and other sensitive information from screenshots and console logs before sharing them publicly.
 
 ## License
 
