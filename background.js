@@ -13,9 +13,38 @@ console.log(`${LOG_PREFIX} Background service worker started.`);
  * Listens for messages from other parts of the extension.
  */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Only process messages requesting a location search.
-  if (message.type !== "SEARCH_LOCATION") {
-    return;
+  // Ignore messages that aren't location search requests.
+  if (!message || message.type !== "SEARCH_LOCATION") {
+    return false;
+  }
+
+  // Only accept search requests from our extension's content script
+  // running on Proton Calendar.
+  const isTrustedSender =
+    sender.id === chrome.runtime.id &&
+    sender.url?.startsWith("https://calendar.proton.me/");
+
+  if (!isTrustedSender) {
+    sendResponse({
+      success: false,
+      error: "Unauthorized location search request.",
+    });
+
+    return false;
+  }
+
+  // Validate the search query before contacting Photon.
+  if (
+    typeof message.query !== "string" ||
+    !message.query.trim() ||
+    message.query.length > 255
+  ) {
+    sendResponse({
+      success: false,
+      error: "Invalid location search query.",
+    });
+
+    return false;
   }
 
   // Process the asynchronous request separately.
@@ -55,6 +84,13 @@ async function searchPhoton(query) {
   }
 
   const data = await response.json();
+
+  // Verify that Photon returned the expected GeoJSON feature list.
+  // Reject unexpected response structures rather than forwarding
+  // malformed data to the content script.
+  if (!data || !Array.isArray(data.features)) {
+    throw new Error("Photon returned an invalid response format.");
+  }
 
   return data.features;
 }
