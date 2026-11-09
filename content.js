@@ -257,6 +257,16 @@ function displayLocationResults(results) {
   container.style.overscrollBehavior = "contain";
 
   for (const result of results) {
+    // Skip malformed features that do not contain usable properties.
+    if (
+      !result ||
+      !result.properties ||
+      typeof result.properties !== "object" ||
+      Array.isArray(result.properties)
+    ) {
+      continue;
+    }
+
     const properties = result.properties;
 
     // Build a readable label from the available address fields.
