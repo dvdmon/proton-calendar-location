@@ -16,6 +16,10 @@ When viewing an event containing a location, the extension adds an **Open in Ope
 - Does not modify the calendar event.
 - Does not send the location to OpenStreetMap until the link is clicked.
 
+<img src="images/openstreetmap-link.png"
+     alt="OpenStreetMap link in Proton Calendar event details"
+     width="550">
+
 ### Search for locations
 
 When creating or editing events, the extension adds a **Search locations** button beneath Proton Calendar's existing location field.
@@ -27,6 +31,10 @@ When creating or editing events, the extension adds a **Search locations** butto
 - Save events normally using Proton Calendar.
 
 Location searches are initiated explicitly by the user. The extension does not automatically transmit location information while typing.
+
+<img src="images/location-search.png"
+     alt="Location search results in Proton Calendar event editor"
+     width="700">
 
 ## Installation
 
