@@ -2,7 +2,7 @@
 
 An open-source browser extension that adds location search and OpenStreetMap integration to [Proton Calendar](https://calendar.proton.me).
 
-**Status: Experimental — Public Beta**
+**Status: Experimental — Available on the Chrome Web Store**
 
 This is an unofficial community project and is not affiliated with or endorsed by Proton AG.
 
@@ -37,6 +37,36 @@ Location searches are initiated explicitly by the user. The extension does not a
      width="700">
 
 ## Installation
+
+### Chrome Web Store (Recommended)
+
+The extension is publicly available through the Chrome Web Store:
+
+**[Install Proton Calendar Location Enhancer](https://chromewebstore.google.com/detail/proton-calendar-location/ikaplnfialbmlefbkjeljipckfngneha)**
+
+1. Open the Chrome Web Store link above.
+2. Click **Add to Chrome** (or the equivalent installation button in your Chromium-based browser).
+3. Open or refresh [Proton Calendar](https://calendar.proton.me).
+
+The extension automatically adds location search functionality when creating or editing events and OpenStreetMap links when viewing events with locations.
+
+### Manual Installation (Developers and Testers)
+
+You can also install the extension directly from GitHub:
+
+1. Visit the [GitHub Releases](https://github.com/dvdmon/proton-calendar-location/releases) page.
+2. Download **Source code (zip)** from the desired release.
+3. Extract the ZIP to a permanent folder.
+4. Open `brave://extensions` or `chrome://extensions`.
+5. Enable **Developer mode** and select **Load unpacked**.
+6. Select the extracted folder containing `manifest.json`.
+7. Open or refresh [Proton Calendar](https://calendar.proton.me).
+
+**Notes:**
+
+- Keep the extracted folder in place while using the unpacked extension.
+- Manually installed extensions do not automatically update through the Chrome Web Store.
+- If you've previously installed an unpacked development version, disable or remove it before installing the store version to avoid having two copies running simultaneously.
 
 **Beta installation (Brave and Chrome)**
 
