@@ -156,6 +156,14 @@ Because the extension interacts directly with Proton Calendar's interface, diffe
 
 **Privacy note:** Please remove personal calendar details, addresses, email addresses, and other sensitive information from screenshots and console logs before sharing them publicly.
 
+## Support the Project
+
+Proton Calendar Location Enhancer is free and open-source.
+
+If you find it useful and would like to show your appreciation or support its continued development, you can [buy me a coffee](https://buymeacoffee.com/dvdmon).
+
+Donations are entirely optional. All features remain free.
+
 ## License
 
 This project is licensed under the MIT License. See LICENSE for details.
